@@ -5,7 +5,7 @@ from keyboards import questionnaire_inline_buttons
 
 async def questionnaire_start(call: types.CallbackQuery):
     await bot.send_message(
-        chat_id=call.from_user.id,
+        chat_id=call.message.chat.id,
         text="Футбол или волейбол?",
         reply_markup=await questionnaire_inline_buttons.questionnaire_keyboard()
     )
@@ -13,7 +13,7 @@ async def questionnaire_start(call: types.CallbackQuery):
 async def football_answer(call: types.CallbackQuery):
     await call.message.delete()
     await bot.send_message(
-        chat_id=call.from_user.id,
+        chat_id=call.message.chat.id,
         text="О круто, мне тоже нравится футбол\n"
              "Криштиану Роналду или Лионель Месси?",
         reply_markup=await questionnaire_inline_buttons.football_questionnaire_keyboard()
@@ -22,7 +22,7 @@ async def football_answer(call: types.CallbackQuery):
 async def volleyball_answer(call: types.CallbackQuery):
     await call.message.delete()
     await bot.send_message(
-        chat_id=call.from_user.id,
+        chat_id=call.message.chat.id,
         text="О круто, мне тоже нравится волейбол \n"
              "Япония или Франция?",
         reply_markup=await questionnaire_inline_buttons.volleyball_questionnaire_keyboard()
@@ -31,30 +31,31 @@ async def volleyball_answer(call: types.CallbackQuery):
 async def football_ronaldo_answer(call: types.CallbackQuery):
     await call.message.delete()
     await bot.send_message(
-        chat_id=call.from_user.id,
+        chat_id=call.message.chat.id,
         text="Отлично! Он же GOAT"
     )
 
 async def football_messi_answer(call: types.CallbackQuery):
     await call.message.delete()
     await bot.send_message(
-        chat_id=call.from_user.id,
+        chat_id=call.message.chat.id,
         text="Хорошо, он тоже хороший игрок"
     )
 
 async def volleyball_japan_answer(call: types.CallbackQuery):
     await call.message.delete()
     await bot.send_message(
-        chat_id=call.from_user.id,
+        chat_id=call.message.chat.id,
         text="Хороший выбор, Япония сильная сборная"
     )
 
 async def volleyball_france_answer(call: types.CallbackQuery):
     await call.message.delete()
     await bot.send_message(
-        chat_id=call.from_user.id,
+        chat_id=call.message.chat.id,
         text="Отличный выбор, в этой сборной один из сильнейших игроков"
     )
+
 
 def register_questionnaire_handlers(dp: Dispatcher):
     dp.register_callback_query_handler(
