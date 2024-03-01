@@ -59,6 +59,8 @@ async def check_ban(call: types.CallbackQuery):
         text=f'Вы были записаны {user["count"]} раз, будьте аккуратнее.'
         await call.message.answer(text)
 
+
+
 def register_group_actions_handlers(dp: Dispatcher):
     dp.register_callback_query_handler(
         check_ban,

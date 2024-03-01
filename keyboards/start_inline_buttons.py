@@ -14,7 +14,16 @@ async def start_keyboard():
         "Проверить себя",
         callback_data="ban_check"
     )
+    registration_button = InlineKeyboardButton(
+        "Регистрация",
+        callback_data="registration"
+    )
+    my_profile_button = InlineKeyboardButton(
+        "Мой профиль",
+        callback_data="my_profile"
+    )
     markup.add(questionnaire_button)
-    markup.add(ban_check_button)
+    markup.add(registration_button)
+    markup.add(my_profile_button)
     return markup
 
