@@ -18,6 +18,20 @@ async def my_profile_keyboard():
     markup.add(delete_button)
     return markup
 
+async def like_dislike_keyboard(tg_id):
+    markup = InlineKeyboardMarkup()
+    like_button = InlineKeyboardButton(
+        "Лайк",
+        callback_data=f"like_{tg_id}"
+    )
+    dislike_button = InlineKeyboardButton(
+        "Дизлайк",
+        callback_data=f"skip_{tg_id}"
+    )
+    markup.add(like_button)
+    markup.add(dislike_button)
+    return markup
+
 
 
 

@@ -22,8 +22,13 @@ async def start_keyboard():
         "Мой профиль",
         callback_data="my_profile"
     )
+    profiles_button = InlineKeyboardButton(
+        "Смотреть профили",
+        callback_data="random_profiles"
+    )
     markup.add(questionnaire_button)
     markup.add(registration_button)
     markup.add(my_profile_button)
+    markup.add(profiles_button)
     return markup
 
