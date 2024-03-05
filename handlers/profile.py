@@ -31,7 +31,7 @@ async def my_profile_call(call: types.CallbackQuery):
                     hobby=profile['hobby'],
                     gender=profile['gender'],
                 ),
-                # reply_markup=await my_profile_keyboard()
+                reply_markup=await my_profile_keyboard()
             )
     else:
         await bot.send_message(
@@ -66,24 +66,25 @@ async def random_filter_profile_call(call: types.CallbackQuery):
             chat_id=call.from_user.id,
             text="Вы уже просмотрели все профили, приходите позже!"
         )
-    else:
-        random_profile = random.choice(profiles)
-        with open(random_profile['photo'], 'rb') as photo:
-            await bot.send_photo(
-                chat_id=call.from_user.id,
-                photo=photo,
-                caption=const.PROFILE_TEXT.format(
-                    nickname=random_profile['nickname'],
-                    biography=random_profile['biography'],
-                    age=random_profile['age'],
-                    zodiac_sign=random_profile['zodiac_sign'],
-                    hobby=random_profile['hobby'],
-                    gender=random_profile['gender'],
-                ),
-                reply_markup=await like_dislike_keyboard(
-                    tg_id=random_profile['telegram_id']
-                )
+        return
+
+    random_profile = random.choice(profiles)
+    with open(random_profile['photo'], 'rb') as photo:
+        await bot.send_photo(
+            chat_id=call.from_user.id,
+            photo=photo,
+            caption=const.PROFILE_TEXT.format(
+                nickname=random_profile['nickname'],
+                biography=random_profile['biography'],
+                age=random_profile['age'],
+                zodiac_sign=random_profile['zodiac_sign'],
+                hobby=random_profile['hobby'],
+                gender=random_profile['gender'],
+            ),
+            reply_markup=await like_dislike_keyboard(
+                tg_id=random_profile['telegram_id']
             )
+        )
 
 async def detect_like_call(call: types.CallbackQuery):
     owner = re.sub("like_", "", call.data)
@@ -100,26 +101,9 @@ async def detect_like_call(call: types.CallbackQuery):
         )
         return
     finally:
-        # await call.message.delete()
+        await call.message.delete()
         await random_filter_profile_call(call=call)
 
-async def detect_dislike_call(call: types.CallbackQuery):
-    dis_owner = re.sub("skip_", "", call.data)
-    db = Database()
-    try:
-        db.sql_insert_dislike(
-            owner=dis_owner,
-            disliker=call.from_user.id
-        )
-    except sqlite3.IntegrityError:
-        await bot.send_message(
-            chat_id=call.from_user.id,
-            text="Вы уже дизлайкнули этот профиль!"
-        )
-        return
-    finally:
-        # await call.message.delete()
-        await random_filter_profile_call(call=call)
 
 
 
@@ -139,8 +123,4 @@ def register_profile_handler(dp: Dispatcher):
     dp.register_callback_query_handler(
         detect_like_call,
         lambda call: 'like_' in call.data
-    )
-    dp.register_callback_query_handler(
-        detect_dislike_call,
-        lambda call: 'skip_' in call.data
     )
