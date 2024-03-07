@@ -10,7 +10,7 @@ from handlers import (
     group_actions,
     registration,
     profile,
-    reference
+    reference,
 )
 from database import bot_db
 
@@ -24,6 +24,7 @@ class Database:
             await self.cursor.execute(sql_queries.CREATE_USER_TABLE_QUERY)
             await self.cursor.execute(sql_queries.CREATE_BAN_USER_TABLE_QUERY)
             await self.cursor.execute(sql_queries.CREATE_NEWS_LINK_QUERY)
+            await self.cursor.execute(sql_queries.CREATE_ASYNC_NEWS_LINK_QUERY)
             await self.conn.commit()
 
         except Exception as e:

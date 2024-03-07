@@ -88,3 +88,4 @@ def register_start_handlers(dp: Dispatcher):
         lambda call: call.data == "latest_news"
     )
 
+
