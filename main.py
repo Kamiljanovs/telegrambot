@@ -23,8 +23,8 @@ class Database:
         try:
             await self.cursor.execute(sql_queries.CREATE_USER_TABLE_QUERY)
             await self.cursor.execute(sql_queries.CREATE_BAN_USER_TABLE_QUERY)
-            await self.cursor.execute(sql_queries.CREATE_NEWS_LINK_QUERY)
-            await self.cursor.execute(sql_queries.CREATE_ASYNC_NEWS_LINK_QUERY)
+            # await self.cursor.execute(sql_queries.CREATE_NEWS_LINK_QUERY)
+            # await self.cursor.execute(sql_queries.CREATE_ASYNC_NEWS_LINK_QUERY)
             await self.conn.commit()
 
         except Exception as e:

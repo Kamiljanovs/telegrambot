@@ -192,9 +192,9 @@ class Database:
         )
         self.connection.commit()
 
-    def sql_insert_news(self, news):
-        self.cursor.execute(
-            sql_queries.INSERT_NEWS_LINK,
-            (None, news)
-        )
-        self.connection.commit()
+    # def sql_insert_news(self, news):
+    #     self.cursor.execute(
+    #         sql_queries.INSERT_NEWS_LINK,
+    #         (None, news)
+    #     )
+    #     self.connection.commit()
