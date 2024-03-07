@@ -11,7 +11,7 @@ class NewsScraper:
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:123.0) Gecko/20100101 Firefox/123.0"
     }
 
-    LINK_XPATH = '//div[@class="news-item"]/div[@class="news-item__content"]/a/@href'
+    LINK_XPATH = '//li[@class="news-item"]/div/a/@href'
 
     def scrape_data(self):
 
