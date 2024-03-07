@@ -11,6 +11,10 @@ async def reference_menu_keyboard():
         "Сгенерируй ссылку",
         callback_data="reference_link"
     )
-    markup.add(link_button)
+    list_button = InlineKeyboardButton(
+        "Список рефералов",
+        callback_data="reference_list"
+    )
+    markup.add(list_button)
     return markup
 

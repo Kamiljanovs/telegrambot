@@ -30,10 +30,15 @@ async def start_keyboard():
         "Реферальное меню",
         callback_data="reference_menu"
     )
+    news_button = InlineKeyboardButton(
+        "Последние новости",
+        callback_data="latest_news"
+    )
     markup.add(questionnaire_button)
     markup.add(registration_button)
     markup.add(my_profile_button)
     markup.add(profiles_button)
     markup.add(reference_button)
+    markup.add(news_button)
     return markup
 

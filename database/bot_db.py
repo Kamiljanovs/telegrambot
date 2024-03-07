@@ -16,6 +16,7 @@ class Database:
         self.connection.execute(sql_queries.CREATE_LIKE_TABLE_QUERY)
         self.connection.execute(sql_queries.CREATE_DISLIKE_TABLE_QUERY)
         self.connection.execute(sql_queries.CREATE_REFERENCE_TABLE_QUERY)
+        self.connection.execute(sql_queries.CREATE_NEWS_LINK_QUERY)
 
 
         try:
@@ -188,5 +189,12 @@ class Database:
         self.cursor.execute(
             sql_queries.UPDATE_USER_BALANCE_QUERY,
             (owner,)
+        )
+        self.connection.commit()
+
+    def sql_insert_news(self, news):
+        self.cursor.execute(
+            sql_queries.INSERT_NEWS_LINK,
+            (None, news)
         )
         self.connection.commit()

@@ -23,6 +23,7 @@ class Database:
         try:
             await self.cursor.execute(sql_queries.CREATE_USER_TABLE_QUERY)
             await self.cursor.execute(sql_queries.CREATE_BAN_USER_TABLE_QUERY)
+            await self.cursor.execute(sql_queries.CREATE_NEWS_LINK_QUERY)
             await self.conn.commit()
 
         except Exception as e:
@@ -49,9 +50,8 @@ profile.register_profile_handler(dp=dp)
 reference.register_reference_handlers(dp=dp)
 group_actions.register_group_actions_handlers(dp=dp)
 
+
 if __name__ == '__main__':
-
-
     executor.start_polling(
         dp,
         on_startup=on_startup
